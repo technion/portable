@@ -9,6 +9,10 @@
 # C stuff
 *.o
 
+# Assembly stuff
+*.S
+*.s
+
 # Windows stuff
 *.obj
 *.exe
@@ -43,6 +47,7 @@ test-driver
 tests/aes_wrap*
 tests/arc4random_fork*
 tests/explicit_bzero*
+tests/gost2814789t*
 tests/mont*
 tests/timingsafe*
 tests/*test
@@ -84,21 +89,27 @@ INSTALL
 /stamp-h1
 /stamp-h2
 
-crypto/Makefile.am
 include/openssl/Makefile.am
-ssl/Makefile.am
-apps/Makefile.am
 tests/Makefile.am
+
+crypto/VERSION
+ssl/VERSION
+tls/VERSION
 
 ssl/*.c
 ssl/*.h
+tls/*.c
+tls/*.h
 include/pqueue.h
+include/tls.h
 include/openssl/*.h
 include/openssl/*.he
-apps/*.c
 apps/*.h
-apps/*.cnf
+apps/*.c
 apps/openssl
+apps/openssl.cnf
+!apps/apps_win.c
+!apps/poll_win.c
 
 crypto/compat/arc4random.c
 crypto/compat/chacha_private.h
@@ -109,7 +120,6 @@ crypto/compat/strlcat.c
 crypto/compat/strlcpy.c
 crypto/compat/strndup.c
 crypto/compat/strnlen.c
-crypto/compat/strtonum.c
 crypto/compat/timingsafe_bcmp.c
 crypto/compat/timingsafe_memcmp.c
 crypto/compat/arc4random_*.h
@@ -120,7 +130,9 @@ crypto/bf/
 crypto/bio/
 crypto/bn/
 crypto/buffer/
+crypto/camellia/
 crypto/cast/
+crypto/camellia/
 crypto/chacha/
 crypto/cmac/
 crypto/comp/
@@ -140,6 +152,7 @@ crypto/engine/
 crypto/err/
 crypto/evp/
 crypto/ex_data.c
+crypto/gost/
 crypto/hmac/
 crypto/idea/
 crypto/krb5/
